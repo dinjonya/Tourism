@@ -23,18 +23,17 @@ namespace Telecom.TourismControllers.Controllers
         private ValidateModel_ValidateResult vResult;
         public ActionResult Index()
         {
-            string accessToken = AuthenApi.AuthenticationGetToken();
-            ExHandler.TreatedWriteLog(null, "test message", Loglevel.Info, "log.info");
+            ////ExHandler.TreatedWriteLog(null, "test message", Loglevel.Info, "log.info");
             Object result = ApiHelper.GetWebApi<Object>(Configs.GetConfig.Base.WebApiUri, "api/test",
                 new Dictionary<string, string>
                 {
                     {"appKey", ConfigurationManager.AppSettings["appKey"]},
-                    {"accessToken", accessToken},
+                    {"accessToken", HttpContext.Cache["accessToken"].ToString()},
                     {"accessIp", HttpUtil.GetClientIP()}
                 });
-            if (result.GetType() == typeof (JObject))
+            if (result.GetType() == typeof(JObject))
             {
-                if ((result as JObject).Property("Status") != null && (result as JObject)["Status"].ToString()== ValidateResultType.Refresh_token.ToString())
+                if ((result as JObject).Property("Status") != null && (result as JObject)["Status"].ToString() == ValidateResultType.Refresh_token.ToString())
                 {
                     HttpContext.Cache.Remove("accessToken");
                     return Index();

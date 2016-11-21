@@ -150,6 +150,7 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiControllers\SysConfigController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -188,12 +189,16 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Bussiness\AuthenBussiness.cs" />
+    <Compile Include="Models\Configs.cs" />
+    <Compile Include="Models\CustomAuthticationFilter.cs" />
     <Compile Include="Models\DBModels\ContextHelper.cs" />
     <Compile Include="Models\DBModels\DbModel_ApiUsers.cs" />
     <Compile Include="Models\DBModels\DbModel_ApiUserIps.cs" />
     <Compile Include="Models\DBModels\SampleData.cs" />
     <Compile Include="Models\DBModels\TourismApiAuthenEntities.cs" />
+    <Compile Include="Models\NoAuthentication.cs" />
     <Compile Include="Models\Services\AuthenServices.cs" />
+    <Compile Include="Models\SysWebApi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -295,6 +300,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
+      <UserProperties Models_4config_1json__JSONSchema="" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

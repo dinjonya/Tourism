@@ -10,7 +10,7 @@ using DinJonYa.Plugs.WebApi;
 using Telecom.TourismModels.ApiModels;
 using Telecom.TourismModels.PublishModels;
 
-namespace Telecom.TourismControllers.Models
+namespace Tourism.ApiAuthen.Models
 {
     public class Configs
     {
@@ -28,7 +28,8 @@ namespace Telecom.TourismControllers.Models
 
         static Configs()
         {
-            config = ApiHelper.GetWebApi<Config_PublishModel>(ConfigurationManager.AppSettings["ApiAuthenUri"], "Sys/Config/GetConfig");
+            config = JsonConfigHelper.GetConfiguration<Config_PublishModel>();
         }
+        
     }
 }

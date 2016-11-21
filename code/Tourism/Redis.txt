@@ -6,3 +6,6 @@ key				value					code															method							description
 sensitiveWords	tb_sensitiveWords		DinJonYa.Aop.Models.DBModels.ContextHelper						Init							存储需要过滤的敏感词
 AppKey			ApiModel_Authen			Telecom.TourismWebApi.Models.CustomAuthticationFilter			OnActionExecuting				获取appKey对应的ApiModel_Authn对象
 										Tourism.ApiAuthen.ApiControllers.AuthenticationController		AuthenticationController		存储appKey对应的ApiModel_Authen对象，3天有效期
+
+
+PublishConfig	Config_PublishModel		Tourism.ApiAuthen.ApiControllers								GetPublishConfig				获取config.json对象

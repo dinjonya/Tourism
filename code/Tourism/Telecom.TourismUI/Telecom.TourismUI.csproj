@@ -169,6 +169,9 @@
     <Content Include="packages.config" />
     <Content Include="Models\config.json" />
     <None Include="Project_Readme.html" />
+    <Content Include="Views\ErrorPage\Error500.cshtml" />
+    <Content Include="Views\ErrorPage\PageNotFound.cshtml" />
+    <None Include="Views\Shared\_Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DinJonYa.Aop\DinJonYa.Aop.csproj">

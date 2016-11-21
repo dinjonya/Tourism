@@ -16,7 +16,7 @@ namespace Tourism.ApiAuthen.ApiControllers
         AuthenBussiness bussiness = new AuthenBussiness();
         RedisBase redis = new RedisBase();
 
-        //call method Telecom.TourismControllers.CustomnAttributes.OnActionExecuting
+        //验证身份获取新的token
         [HttpGet]
         [Route("Api/Authen/ui-GetNewToken")]
         public ApiModel_Authen ApiAuthenGetNewToken()
@@ -31,7 +31,7 @@ namespace Tourism.ApiAuthen.ApiControllers
             string appSecrect = Request.Headers.GetValues("AppSecrect").FirstOrDefault();
             string accessIp = Request.Headers.GetValues("accessIp").FirstOrDefault();
             ApiModel_Authen model = bussiness.AddNewTokenByAppKey(appKey, appSecrect, accessIp);
-            if (model.Id > 0)
+            if (model!=null && model.Id > 0)
             {
                 //创建token成功 保存redis 过期时间3天
                 DateTime expirTime = UnixTimeHelper.FromUnixTime(Convert.ToInt64(model.TokenExpiration));

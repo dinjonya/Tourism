@@ -26,6 +26,8 @@ namespace Telecom.TourismControllers
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
+            filters.Add(new CustActionFilterAttribute(), 1);
+            filters.Add(new HandleErrorAttribute(),2);
             filters.Add(new HandleErrorAttribute(), 3);
         }
     }

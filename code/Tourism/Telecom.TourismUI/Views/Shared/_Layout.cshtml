@@ -1,0 +1,22 @@
+﻿@using Telecom.TourismControllers.Models
+@{
+    string cssPath = Configs.ResourcesConfig.CssPath;
+    string jsPath = Configs.ResourcesConfig.JsPath;
+}
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @RenderSection("Styles", false)
+    @RenderSection("headerScripts", false)
+    
+</head>
+<body>
+    @RenderBody()
+    <script src="@(jsPath)jquery-1.10.2.min.js"></script>
+    @RenderSection("Scripts", false)
+</body>
+</html>

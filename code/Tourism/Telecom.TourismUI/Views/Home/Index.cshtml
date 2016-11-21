@@ -1,0 +1,21 @@
+﻿@using Telecom.TourismControllers.Models
+@{
+    ViewBag.Title = "Home Page";
+    string cssPath = Configs.ResourcesConfig.CssPath;
+    string jsPath = Configs.ResourcesConfig.JsPath;
+}
+@section Styles{
+    <link href="@(cssPath)test.css" rel="stylesheet" />
+}
+<div class="jumbotron">
+    <h1 class="test">Telecom.TourismUI</h1>
+    <h1>@(ViewBag.TestValue)</h1>
+</div>
+@section Scripts{
+    <script src="@(jsPath)App.js"></script>
+    <script>
+        $(function() {
+            alert(app.SiteConfig.ResourcesUrl);
+        })
+    </script>
+}

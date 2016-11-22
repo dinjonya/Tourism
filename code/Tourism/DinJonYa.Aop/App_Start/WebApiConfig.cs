@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using DinJonYa.Aop.CustomnAttributes;
 
 namespace DinJonYa.Aop
 {
@@ -10,7 +11,7 @@ namespace DinJonYa.Aop
         public static void Register(HttpConfiguration config)
         {
             // Web API 配置和服务
-
+            config.Filters.Add(new CustActionFilterAttribute());
             // Web API 路由
             config.MapHttpAttributeRoutes();
 

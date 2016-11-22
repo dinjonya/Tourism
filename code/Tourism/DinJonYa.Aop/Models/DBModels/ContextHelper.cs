@@ -26,8 +26,8 @@ namespace DinJonYa.Aop.Models.DBModels
             using (var db = new DinJonYaAopEntities())
             {
                 List<string> sensitiveWords = (from s in db.SensitiveWords select s.SensitiveWord).ToList();
-                RedisBase redis = new RedisBase();
-                redis.StringSet("sensitiveWords", sensitiveWords);
+                //RedisBase redis = new RedisBase();
+                //redis.StringSet("sensitiveWords", sensitiveWords);
             }
         }
     }

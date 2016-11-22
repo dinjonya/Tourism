@@ -18,18 +18,12 @@ namespace Tourism.ApiAuthen.Models
         {
             get { return config; }
         }
-        private static Config_PublishModel config = null;
+        private static Config_PublishModel config = JsonConfigHelper.GetConfiguration<Config_PublishModel>();
         private static Resources_Config resourcesConfig = null;
 
         public static Resources_Config ResourcesConfig
         {
             get { return config.Resources; }
         }
-
-        static Configs()
-        {
-            config = JsonConfigHelper.GetConfiguration<Config_PublishModel>();
-        }
-        
     }
 }

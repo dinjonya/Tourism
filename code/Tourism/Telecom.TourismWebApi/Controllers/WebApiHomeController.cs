@@ -10,6 +10,7 @@ namespace Telecom.TourismWebApi.Controllers
     {
         public ActionResult Index()
         {
+
             ViewBag.Title = "Home Page";
 
             return View();

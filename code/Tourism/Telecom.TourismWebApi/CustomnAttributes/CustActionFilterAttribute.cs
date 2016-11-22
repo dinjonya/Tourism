@@ -31,28 +31,23 @@ using DinJonYa.Plugs.Strings;
 using DinJonYa.RedisExchange;
 using Telecom.TourismModels.ApiModels;
 using Telecom.TourismModels.PublishModels;
+using Telecom.TourismWebApi.Models;
 
-namespace Tourism.ApiAuthen.Models
+namespace Telecom.TourismWebApi.CustomnAttributes
 {
     /// <summary>
     /// 用户登录  身份认证与过滤
     /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
-    public class CustomAuthticationFilter : System.Web.Http.Filters.ActionFilterAttribute
+    public class CustActionFilterAttribute : System.Web.Http.Filters.ActionFilterAttribute
     {
         public bool IsAuthentication { get; set; }
-        
-        private RedisBase redis = null;
+
+        private RedisBase redis = SysWebApi.Redis;
         private HttpResponseMessage response = null;
         private ValidateMessage_Config validateMsg = null;
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
-            List<NoAuthentication> actionFilter = actionContext.ActionDescriptor.GetCustomAttributes<NoAuthentication>().ToList();
-            List<NoAuthentication> controllerFilter = actionContext.ActionDescriptor.ControllerDescriptor.GetCustomAttributes<NoAuthentication>().ToList();
-            //有 NoAuthentication 则 不验证
-            if (actionFilter.Count > 1 || controllerFilter.Count > 1)
-                return;
-
             //判断是否拥有token  如果有则继续  没有则回跳
             HttpRequestHeaders requestHeaders = actionContext.Request.Headers;
             #region 验证token
@@ -77,7 +72,7 @@ namespace Tourism.ApiAuthen.Models
             ApiModel_Authen authenModel = null;
 
             #region 获取appKey 对应存储的 storageToken   如果可以成功获取 则判断 token是否匹配
-            redis = SysWebApi.Redis;
+
             //如果redis没有 则读取数据库 存入redis
             if (redis.StringHasKey(appKey))
             {
@@ -94,8 +89,8 @@ namespace Tourism.ApiAuthen.Models
                     //ip不正确
                     IsAuthentication = false;
                     validateMsg = SysWebApi.GetValidateByHttpStatusCode(4);
-                    response = actionContext.Request.CreateResponse((HttpStatusCode) validateMsg.HttpStatusCode,
-                        new {Status = validateMsg.Status, Message = validateMsg.Message}, "application/json");
+                    response = actionContext.Request.CreateResponse((HttpStatusCode)validateMsg.HttpStatusCode,
+                        new { Status = validateMsg.Status, Message = validateMsg.Message }, "application/json");
                     actionContext.Response = response;
                     return;
                 }

@@ -28,7 +28,6 @@ namespace DinJonYa.Plugs.WebApi
     {
 
         private readonly static Object lockObj = new Object();
-        private static readonly HttpClient httpPostClient = new HttpClient();
 
         /// <summary>
         /// 异步 Get方法调用 webApi
@@ -63,22 +62,25 @@ namespace DinJonYa.Plugs.WebApi
 
         public static async Task<T> PostAsync<T>(string webApiUri, string webApiPath, Object obj, Dictionary<string, string> customHeaders = null, string MediaType = "application/json")
         {
-            httpPostClient.BaseAddress = new Uri(webApiUri);
-            httpPostClient.DefaultRequestHeaders.Clear();
-            httpPostClient.DefaultRequestHeaders.Accept.Clear();
-            if (customHeaders != null)
+            using (HttpClient httpPostClient = new HttpClient())
             {
-                foreach (KeyValuePair<string, string> customHeader in customHeaders)
+                httpPostClient.BaseAddress = new Uri(webApiUri);
+                httpPostClient.DefaultRequestHeaders.Clear();
+                httpPostClient.DefaultRequestHeaders.Accept.Clear();
+                if (customHeaders != null)
                 {
-                    httpPostClient.DefaultRequestHeaders.Add(customHeader.Key, customHeader.Value);
+                    foreach (KeyValuePair<string, string> customHeader in customHeaders)
+                    {
+                        httpPostClient.DefaultRequestHeaders.Add(customHeader.Key, customHeader.Value);
+                    }
                 }
+                httpPostClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(MediaType));
+                httpPostClient.DefaultRequestHeaders.Connection.Add("keep-alive");
+                Task<HttpResponseMessage> httpResponseMessage = httpPostClient.PostAsJsonAsync(webApiPath, obj);
+                HttpResponseMessage result = httpResponseMessage.Result;
+                result.EnsureSuccessStatusCode();
+                return await result.Content.ReadAsAsync<T>();
             }
-            httpPostClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(MediaType));
-            httpPostClient.DefaultRequestHeaders.Connection.Add("keep-alive");
-            Task<HttpResponseMessage> httpResponseMessage = httpPostClient.PostAsJsonAsync(webApiPath, obj);
-            HttpResponseMessage result = httpResponseMessage.Result;
-            result.EnsureSuccessStatusCode();
-            return await result.Content.ReadAsAsync<T>();
         }
 
 
@@ -117,21 +119,24 @@ namespace DinJonYa.Plugs.WebApi
         /// <returns>返回对应的信息</returns>
         public static string PostWebApi(string webApiUri, string webApiPath, Object obj, Dictionary<string, string> customHeaders = null, string MediaType = "application/json")
         {
-            httpPostClient.BaseAddress = new Uri(webApiUri);
-            httpPostClient.DefaultRequestHeaders.Accept.Clear();
-            httpPostClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(MediaType));
-            if (customHeaders != null)
+            using (HttpClient httpPostClient = new HttpClient())
             {
-                foreach (KeyValuePair<string, string> customHeader in customHeaders)
+                httpPostClient.BaseAddress = new Uri(webApiUri);
+                httpPostClient.DefaultRequestHeaders.Accept.Clear();
+                httpPostClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(MediaType));
+                if (customHeaders != null)
                 {
-                    httpPostClient.DefaultRequestHeaders.Add(customHeader.Key, customHeader.Value);
+                    foreach (KeyValuePair<string, string> customHeader in customHeaders)
+                    {
+                        httpPostClient.DefaultRequestHeaders.Add(customHeader.Key, customHeader.Value);
+                    }
                 }
-            }
-            lock (lockObj)
-            {
-                Task<HttpResponseMessage> httpResponseMessage = httpPostClient.PostAsJsonAsync(webApiPath, obj);
-                string result = httpResponseMessage.Result.Content.ReadAsStringAsync().Result;
-                return result;
+                lock (lockObj)
+                {
+                    Task<HttpResponseMessage> httpResponseMessage = httpPostClient.PostAsJsonAsync(webApiPath, obj);
+                    string result = httpResponseMessage.Result.Content.ReadAsStringAsync().Result;
+                    return result;
+                }
             }
         }
 
@@ -145,21 +150,24 @@ namespace DinJonYa.Plugs.WebApi
         /// <returns>返回对应的信息</returns>
         public static T PostWebApi<T>(string webApiUri, string webApiPath, Object obj, Dictionary<string, string> customHeaders = null, string MediaType = "application/json")
         {
-            httpPostClient.BaseAddress = new Uri(webApiUri);
-            httpPostClient.DefaultRequestHeaders.Accept.Clear();
-            httpPostClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(MediaType));
-            if (customHeaders != null)
+            using (HttpClient httpPostClient = new HttpClient())
             {
-                foreach (KeyValuePair<string, string> customHeader in customHeaders)
+                httpPostClient.BaseAddress = new Uri(webApiUri);
+                httpPostClient.DefaultRequestHeaders.Accept.Clear();
+                httpPostClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(MediaType));
+                if (customHeaders != null)
                 {
-                    httpPostClient.DefaultRequestHeaders.Add(customHeader.Key, customHeader.Value);
+                    foreach (KeyValuePair<string, string> customHeader in customHeaders)
+                    {
+                        httpPostClient.DefaultRequestHeaders.Add(customHeader.Key, customHeader.Value);
+                    }
                 }
-            }
-            lock (lockObj)
-            {
-                Task<HttpResponseMessage> httpResponseMessage = httpPostClient.PostAsJsonAsync(webApiPath, obj);
-                T result = httpResponseMessage.Result.Content.ReadAsAsync<T>().Result;
-                return result;
+                lock (lockObj)
+                {
+                    Task<HttpResponseMessage> httpResponseMessage = httpPostClient.PostAsJsonAsync(webApiPath, obj);
+                    T result = httpResponseMessage.Result.Content.ReadAsAsync<T>().Result;
+                    return result;
+                }
             }
         }
     }

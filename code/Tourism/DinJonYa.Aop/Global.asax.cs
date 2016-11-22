@@ -8,9 +8,11 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using DinJonYa.Aop.Models;
 using DinJonYa.Aop.Models.DBModels;
 using DinJonYa.Aop.Models.MQ;
 using DinJonYa.Plugs.Configs;
+using DinJonYa.Plugs.WebApi;
 using Telecom.TourismModels.PublishModels;
 
 namespace DinJonYa.Aop
@@ -28,13 +30,11 @@ namespace DinJonYa.Aop
             if (Convert.ToBoolean(ConfigurationManager.AppSettings["AutomaticMigration"]))
             {
                 Database.SetInitializer<DinJonYaAopEntities>(new SampleData());
-                ContextHelper.Init();
+                //ContextHelper.Init();
             }
 
             //开启rabbitMQ消息队列
-            Aop_Config aopConfig = JsonConfigHelper.GetConfiguration<Config_PublishModel>().Aop;
-            Application["aopConfig"] = aopConfig;
-            AbstractOrderProcessMessage.InitOrderProcess(aopConfig);
+            AbstractOrderProcessMessage.InitOrderProcess();
         }
     }
 }

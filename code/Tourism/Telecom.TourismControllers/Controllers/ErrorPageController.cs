@@ -13,6 +13,7 @@ namespace Telecom.TourismControllers.Controllers
     {
         public ActionResult Error500(string statue)
         {
+            HttpContext.Response.Headers.Add("Cache-Control", "no-store");
             return View();
         }
 

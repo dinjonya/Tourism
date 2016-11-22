@@ -14,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
+using DinJonYa.RedisExchange;
 
 namespace Tourism.ApiAuthen.Models.DBModels
 {
@@ -23,7 +24,20 @@ namespace Tourism.ApiAuthen.Models.DBModels
         {
             using (var db = new TourismApiAuthenEntities())
             {
-                var user = db.ApiUsers.FirstOrDefault();
+                var apps = (from apiUser in db.ApiUsers select new
+                {
+                    Id=apiUser.Id,
+                    Appkey=apiUser.AppKey,
+                    AppName=apiUser.AppName,
+                    Token="",
+                    CreateTokenTime= "",
+                    InnerApp=apiUser.InnerApp
+                }).ToList();
+                RedisBase redis = new RedisBase(Configs.GetConfig.Redis);
+                foreach (var app in apps)
+                {
+                    redis.StringSet(app.Appkey, app);
+                }
             }
         }
     }

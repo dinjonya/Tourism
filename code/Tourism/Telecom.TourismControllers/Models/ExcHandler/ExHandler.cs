@@ -5,8 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using DinJonYa.Plugs.Http;
 using DinJonYa.Plugs.WebApi;
+using Newtonsoft.Json.Linq;
 using Telecom.TourismModels.MQModels;
+using Telecom.TourismModels.ValidateModels;
 
 namespace Telecom.TourismControllers.Models.ExcHandler
 {
@@ -24,7 +27,7 @@ namespace Telecom.TourismControllers.Models.ExcHandler
             Loglevel loglevel = Loglevel.Error, string routeKey = "log.error", string ip = "127.0.0.1")
         {
             {
-                ApiHelper.PostWebApi<int>(AopUri, "Aop/MQ-Log",
+                ApiHelper.PostWebApi(AopUri, "Aop/MQ-Log",
                     new MQLog_Model
                     {
                         LogLevel = loglevel,
@@ -32,6 +35,9 @@ namespace Telecom.TourismControllers.Models.ExcHandler
                         IpLocation = ip,
                         RoutingKey = routeKey,
                         Message = message,
+                    }, new Dictionary<string, string>
+                    {
+                        {"appKey", ConfigurationManager.AppSettings["appKey"]}
                     });
             }
         }

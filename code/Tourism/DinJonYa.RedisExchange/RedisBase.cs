@@ -27,6 +27,11 @@ namespace DinJonYa.RedisExchange
 {
     public class RedisBase : IRedisClient
     {
+        public RedisBase(Redis_Config redis_Config)
+        {
+            redisConfig = redis_Config;
+        }
+
         #region 私有公用方法   在其中我们序列化操作使用Newtonsoft.Json组件
 
         public static string SerializeContent(object value)
@@ -45,7 +50,7 @@ namespace DinJonYa.RedisExchange
         private static volatile ConnectionMultiplexer _connection;
         private static readonly object _lock = new object();
         private static ConfigurationOptions config = null;
-        private static Redis_Config redisConfig = JsonConfigHelper.GetConfiguration<Config_PublishModel>().Redis;
+        private static Redis_Config redisConfig = null;
         private static Lazy<ConnectionMultiplexer> lazyConnection = new Lazy<ConnectionMultiplexer>(() =>
         {
             if (!redisConfig.Enabled)

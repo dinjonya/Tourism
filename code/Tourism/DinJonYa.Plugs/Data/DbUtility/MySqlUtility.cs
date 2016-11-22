@@ -13,7 +13,12 @@ namespace DinJonYa.Plugs.Data.DbUtility
 {
     public class MySqlUtility
     {
-        public static readonly string connStr = ConfigurationManager.ConnectionStrings["MySqlEntities"].ConnectionString;
+        private static string connectionString = "";
+        static MySqlUtility()
+        {
+            connectionString = "1";
+        }
+        public static readonly string connStr = connectionString;
         /*优点：1、把数据库连接代码都放在SQLHelper中，使代码更简洁
              *   2、使用DataTable可以随意读取数据库，而之前做的用户登录使用的SqlReader只能逐行往前读*/
 

@@ -13,8 +13,7 @@ namespace Tourism.ApiAuthen.ApiControllers
 {
     public class SysConfigController : ApiController
     {
-        RedisBase redis = new RedisBase();
-        [NoAuthentication]
+        RedisBase redis = new RedisBase(Configs.GetConfig.Redis);
         [HttpGet]
         [Route("Sys/Config/GetConfig")]
         public Config_PublishModel GetPublishConfig()

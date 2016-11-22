@@ -9,7 +9,7 @@ using DinJonYa.Plugs.Http;
 using DinJonYa.Plugs.WebApi;
 using Telecom.TourismModels.MQModels;
 
-namespace Telecom.TourismWebApi.Models.ExcHandler
+namespace DinJonYa.Aop.Models.ExcHandler
 {
     public class ExHandler
     {
@@ -35,7 +35,14 @@ namespace Telecom.TourismWebApi.Models.ExcHandler
                         Message = message,
                     }, new Dictionary<string, string>
                     {
-                        {"appKey", ConfigurationManager.AppSettings["appKey"]}
+                        {"appKey", ConfigurationManager.AppSettings["appKey"]},
+                        {
+                            "accessToken",
+                            HttpContext.Current.Cache["accessToken"] == null
+                                ? ""
+                                : HttpContext.Current.Cache["accessToken"].ToString()+1
+                        },
+                        {"accessIp", HttpUtil.GetClientIP()}
                     });
             }
         }

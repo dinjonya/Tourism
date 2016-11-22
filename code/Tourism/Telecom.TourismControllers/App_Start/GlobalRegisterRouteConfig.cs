@@ -19,6 +19,13 @@ namespace Telecom.TourismControllers
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
                 namespaces: new string[] { "Telecom.TourismControllers.Controllers" }
             );
+
+            routes.MapRoute(
+                name: "Telecom_TourismControllers_error",
+                url: "error/{action}/{error}/{dt}",
+                defaults: new { controller = "ErrorPage", action = "Error500", error = UrlParameter.Optional,dt=UrlParameter.Optional },
+                namespaces: new string[] { "Telecom.TourismControllers.Controllers" }
+            );
         }
     }
 }

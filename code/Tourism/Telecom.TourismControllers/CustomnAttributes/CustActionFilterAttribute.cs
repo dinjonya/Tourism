@@ -30,35 +30,23 @@ namespace Telecom.TourismControllers.CustomnAttributes
                 return;
             }
 
-            ApiModel_Authen authenResult = null;
-            Cache uiCache = HttpContext.Current.Cache;
-            if (uiCache["accessToken"] == null)
+            int flag = new AccessTokenHelper().GetOrCreateToken();
+            if (flag > 0)
             {
-                //获取token
-                authenResult = ApiHelper.GetWebApi<ApiModel_Authen>(Configs.GetConfig.ApiAuthen.ApiAuthenUri, "Api/Authen/ui-GetNewToken",
-                new Dictionary<string, string>
-                {
-                    {"appKey", ConfigurationManager.AppSettings["appKey"]},
-                    {"AppSecrect", ConfigurationManager.AppSettings["AppSecrect"]},
-                    {"accessIp", HttpUtil.GetClientIP()}
-                });
-                if (authenResult != null && authenResult.Id > 0)
-                {
-                    DateTime dt = DateTime.Now;
-                    DateTime tokenExpirTime = UnixTimeHelper.FromUnixTime(Convert.ToInt64(authenResult.TokenExpiration));
-                    uiCache.Insert("accessToken", authenResult.Token, null,
-                        dt.AddSeconds((tokenExpirTime - dt).TotalSeconds), TimeSpan.Zero);
-                    base.OnActionExecuting(filterContext);
-                    return;
-                }
-                if (authenResult == null)
-                {
-                    filterContext.Result = new RedirectResult("/ErrorPage/Error500/-1", true);
-                    return;
-                }
-                filterContext.Result = new RedirectResult("/ErrorPage/Error500/" + authenResult.Id, true);
+                base.OnActionExecuting(filterContext);
                 return;
             }
+            else
+            {
+                filterContext.HttpContext.Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                filterContext.Result = new RedirectResult("/ErrorPage/Error500/"+ flag, true);
+            }
+        }
+
+        public override void OnResultExecuted(ResultExecutedContext filterContext)
+        {
+            filterContext.HttpContext.Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            base.OnResultExecuted(filterContext);
         }
     }
 }

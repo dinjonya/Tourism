@@ -7,6 +7,7 @@ using System.Web.Http;
 using DinJonYa.Plugs.Time;
 using DinJonYa.RedisExchange;
 using Telecom.TourismModels.ApiModels;
+using Tourism.ApiAuthen.Models;
 using Tourism.ApiAuthen.Models.Bussiness;
 
 namespace Tourism.ApiAuthen.ApiControllers
@@ -14,7 +15,7 @@ namespace Tourism.ApiAuthen.ApiControllers
     public class AuthenticationController : ApiController
     {
         AuthenBussiness bussiness = new AuthenBussiness();
-        RedisBase redis = new RedisBase();
+        RedisBase redis = new RedisBase(Configs.GetConfig.Redis);
 
         //验证身份获取新的token
         [HttpGet]

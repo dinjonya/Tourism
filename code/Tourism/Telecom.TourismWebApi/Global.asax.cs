@@ -9,6 +9,7 @@ using System.Web.Routing;
 using DinJonYa.Plugs.Configs;
 using DinJonYa.RedisExchange;
 using Telecom.TourismModels.PublishModels;
+using Telecom.TourismWebApi.CustomnAttributes;
 using Telecom.TourismWebApi.Models;
 
 namespace Telecom.TourismWebApi
@@ -22,6 +23,11 @@ namespace Telecom.TourismWebApi
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+        }
+
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            CustomExceptionHandler.OnException(((WebApiApplication)sender).Context);
         }
     }
 

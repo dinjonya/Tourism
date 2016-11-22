@@ -23,7 +23,7 @@ namespace Telecom.TourismControllers.Controllers
         private ValidateModel_ValidateResult vResult;
         public ActionResult Index()
         {
-            ////ExHandler.TreatedWriteLog(null, "test message", Loglevel.Info, "log.info");
+            
             Object result = ApiHelper.GetWebApi<Object>(Configs.GetConfig.Base.WebApiUri, "api/test",
                 new Dictionary<string, string>
                 {
@@ -39,6 +39,9 @@ namespace Telecom.TourismControllers.Controllers
                     return Index();
                 }
             }
+            int a = 0;
+            int b = 0;
+            int c = a / b;
             ViewBag.TestValue = result.ToString();
             return View();
         }

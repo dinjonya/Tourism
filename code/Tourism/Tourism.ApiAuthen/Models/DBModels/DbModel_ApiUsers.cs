@@ -25,5 +25,7 @@ namespace Tourism.ApiAuthen.Models.DBModels
         [MaxLength(32)]
         public string Salt { get; set; }
         public string CreateTokenTime { get; set; }
+        public int InnerApp { get; set; }
+
     }
 }

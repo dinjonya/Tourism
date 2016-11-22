@@ -11,8 +11,9 @@ namespace DinJonYa.Aop.Models.MQ
     public abstract class AbstractOrderProcessMessage : IProcessMessage
     {
         protected static IPScanner ipSearch= new IPScanner { DataPath = HttpContext.Current.Server.MapPath("~/Content/IPData/qqwry.dat") };
-        public static void InitOrderProcess(Aop_Config aopConfig)
+        public static void InitOrderProcess()
         {
+            Aop_Config aopConfig = SysWebApi.Configs.Aop;
             if (!aopConfig.RabbitMQ.Enabled)
                 return;
             foreach (RouteingKeys_Config routeingKeyCfg in aopConfig.RabbitMQ.RouteingKeys)

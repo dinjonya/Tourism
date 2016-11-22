@@ -113,10 +113,10 @@
     <Compile Include="App_Start\GlobalRegisterRouteConfig.cs" />
     <Compile Include="Controllers\ErrorPageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="CustomnAttributes\AccessTokenHelper.cs" />
     <Compile Include="CustomnAttributes\CustActionFilterAttribute.cs" />
     <Compile Include="CustomnAttributes\CustomExceptionHandler.cs" />
     <Compile Include="CustomnAttributes\NoActionFilterAttribute.cs" />
-    <Compile Include="Models\AuthenApi.cs" />
     <Compile Include="Models\Configs.cs" />
     <Compile Include="Models\ExcHandler\ExHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

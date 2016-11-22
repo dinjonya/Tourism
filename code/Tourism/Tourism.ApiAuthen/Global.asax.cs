@@ -11,6 +11,7 @@ using System.Web.Routing;
 using DinJonYa.Plugs.Configs;
 using DinJonYa.RedisExchange;
 using Telecom.TourismModels.PublishModels;
+using Tourism.ApiAuthen.Models;
 using Tourism.ApiAuthen.Models.DBModels;
 
 namespace Tourism.ApiAuthen
@@ -24,12 +25,16 @@ namespace Tourism.ApiAuthen
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            new RedisBase(Configs.GetConfig.Redis).Cleardb();
+
+
             if (Convert.ToBoolean(ConfigurationManager.AppSettings["AutomaticMigration"]))
             {
                 Database.SetInitializer<TourismApiAuthenEntities>(new SampleData());
                 ContextHelper.Init();
             }
-            new RedisBase().Cleardb();
+            
         }
     }
 }

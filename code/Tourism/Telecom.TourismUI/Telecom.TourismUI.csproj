@@ -161,13 +161,13 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
-    <Content Include="Models\config.json" />
     <None Include="Project_Readme.html" />
     <Content Include="Views\ErrorPage\Error500.cshtml" />
     <Content Include="Views\ErrorPage\PageNotFound.cshtml" />

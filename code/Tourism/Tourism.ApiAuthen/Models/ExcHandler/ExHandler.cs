@@ -8,8 +8,9 @@ using System.Web;
 using DinJonYa.Plugs.Http;
 using DinJonYa.Plugs.WebApi;
 using Telecom.TourismModels.MQModels;
+using Tourism.ApiAuthen.Models;
 
-namespace DinJonYa.Aop.Models.ExcHandler
+namespace Tourism.ApiAuthen.Models.ExcHandler
 {
     public class ExHandler
     {

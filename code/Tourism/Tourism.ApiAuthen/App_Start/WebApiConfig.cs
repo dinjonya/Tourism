@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using Tourism.ApiAuthen.CustomnAttributes;
 
 namespace Tourism.ApiAuthen
 {
@@ -10,6 +11,7 @@ namespace Tourism.ApiAuthen
         public static void Register(HttpConfiguration config)
         {
             // Web API 配置和服务
+            config.Filters.Add(new CustomExceptionFilterAttribute());
             // Web API 路由
             config.MapHttpAttributeRoutes();
 

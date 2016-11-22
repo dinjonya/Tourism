@@ -39,9 +39,6 @@ namespace Telecom.TourismControllers.Controllers
                     return Index();
                 }
             }
-            int a = 0;
-            int b = 0;
-            int c = a / b;
             ViewBag.TestValue = result.ToString();
             return View();
         }

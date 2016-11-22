@@ -8,6 +8,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using DinJonYa.Aop.CustomnAttributes;
 using DinJonYa.Aop.Models;
 using DinJonYa.Aop.Models.DBModels;
 using DinJonYa.Aop.Models.MQ;
@@ -35,6 +36,11 @@ namespace DinJonYa.Aop
 
             //开启rabbitMQ消息队列
             AbstractOrderProcessMessage.InitOrderProcess();
+        }
+
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            CustomExceptionHandler.OnException(((WebApiApplication)sender).Context);
         }
     }
 }

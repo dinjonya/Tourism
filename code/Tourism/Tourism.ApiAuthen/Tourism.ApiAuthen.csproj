@@ -148,7 +148,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="CustomnAttributes\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiControllers\SysConfigController.cs" />
@@ -186,6 +185,8 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\ApiAuthenHomeController.cs" />
     <Compile Include="ApiControllers\AuthenticationController.cs" />
+    <Compile Include="CustomnAttributes\CustomExceptionFilterAttribute.cs" />
+    <Compile Include="CustomnAttributes\CustomExceptionHandler.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -196,6 +197,7 @@
     <Compile Include="Models\DBModels\DbModel_ApiUserIps.cs" />
     <Compile Include="Models\DBModels\SampleData.cs" />
     <Compile Include="Models\DBModels\TourismApiAuthenEntities.cs" />
+    <Compile Include="Models\ExcHandler\ExHandler.cs" />
     <Compile Include="Models\Services\AuthenServices.cs" />
     <Compile Include="Models\SysWebApi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

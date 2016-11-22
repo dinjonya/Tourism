@@ -21,11 +21,11 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using DinJonYa.Aop.Models.ExcHandler;
 using DinJonYa.Plugs.Time;
 using Telecom.TourismModels.MQModels;
+using Tourism.ApiAuthen.Models.ExcHandler;
 
-namespace DinJonYa.Aop.CustomnAttributes
+namespace Tourism.ApiAuthen.CustomnAttributes
 {
 
     public class CustomExceptionHandler

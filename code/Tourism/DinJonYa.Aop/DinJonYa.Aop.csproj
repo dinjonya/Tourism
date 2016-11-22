@@ -197,6 +197,7 @@
     <Compile Include="Controllers\AopHomeController.cs" />
     <Compile Include="ApiControllers\MQController.cs" />
     <Compile Include="CustomnAttributes\CustActionFilterAttribute.cs" />
+    <Compile Include="CustomnAttributes\CustomExceptionFilterAttribute.cs" />
     <Compile Include="CustomnAttributes\CustomExceptionHandler.cs" />
     <Compile Include="CustomnAttributes\NoActionFilterAttribute.cs" />
     <Compile Include="Global.asax.cs">

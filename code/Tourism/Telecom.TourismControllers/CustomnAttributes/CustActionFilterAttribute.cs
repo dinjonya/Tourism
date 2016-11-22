@@ -45,7 +45,7 @@ namespace Telecom.TourismControllers.CustomnAttributes
 
         public override void OnResultExecuted(ResultExecutedContext filterContext)
         {
-            filterContext.HttpContext.Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            //写入 操作日志
             base.OnResultExecuted(filterContext);
         }
     }

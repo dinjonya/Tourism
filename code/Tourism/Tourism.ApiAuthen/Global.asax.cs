@@ -11,6 +11,7 @@ using System.Web.Routing;
 using DinJonYa.Plugs.Configs;
 using DinJonYa.RedisExchange;
 using Telecom.TourismModels.PublishModels;
+using Tourism.ApiAuthen.CustomnAttributes;
 using Tourism.ApiAuthen.Models;
 using Tourism.ApiAuthen.Models.DBModels;
 
@@ -35,6 +36,12 @@ namespace Tourism.ApiAuthen
                 ContextHelper.Init();
             }
             
+        }
+
+
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            CustomExceptionHandler.OnException(((WebApiApplication)sender).Context);
         }
     }
 }

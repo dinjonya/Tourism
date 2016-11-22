@@ -12,6 +12,7 @@ namespace DinJonYa.Aop
         {
             // Web API 配置和服务
             config.Filters.Add(new CustActionFilterAttribute());
+            config.Filters.Add(new CustomExceptionFilterAttribute());
             // Web API 路由
             config.MapHttpAttributeRoutes();
 

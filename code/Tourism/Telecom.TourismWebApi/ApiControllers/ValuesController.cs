@@ -14,9 +14,6 @@ namespace Telecom.TourismWebApi.ApiControllers
         // GET api/values
         public string Get()
         {
-            int a = 0;
-            int b = 0;
-            int c = a / b;
             return "api-controller-value";
         }
     }

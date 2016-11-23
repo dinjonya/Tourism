@@ -51,7 +51,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00.readMe", "00.readMe", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "11.ApiAuthen", "11.ApiAuthen", "{9587E049-720E-4AF7-9027-CFB1720D87B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tourism.ApiAuthen", "Tourism.ApiAuthen\Tourism.ApiAuthen.csproj", "{725BF4C1-3612-4D5F-A7D6-F8628210209F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DinJonYa.ApiAuthen", "DinJonYa.ApiAuthen\DinJonYa.ApiAuthen.csproj", "{725BF4C1-3612-4D5F-A7D6-F8628210209F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

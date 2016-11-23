@@ -19,14 +19,13 @@ using Telecom.TourismModels.ValidateModels;
 
 namespace Telecom.TourismControllers.Controllers
 {
+    
     public partial  class HomeController : Controller
     {
         private ValidateModel_ValidateResult vResult;
+
         public ActionResult Index()
         {
-            int a = 0;
-            int b = 0;
-            int c = a/b;
             Object result = ApiHelper.GetWebApi<Object>(Configs.GetConfig.Base.WebApiUri, "api/test",
                 new Dictionary<string, string>
                 {

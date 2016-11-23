@@ -10,6 +10,7 @@ using System.Web.Caching;
 using System.Web.Mvc;
 using DinJonYa.Plugs.Http;
 using Newtonsoft.Json.Linq;
+using Telecom.TourismControllers.CustomnAttributes;
 using Telecom.TourismControllers.Models;
 using Telecom.TourismControllers.Models.ExcHandler;
 using Telecom.TourismModels.MQModels;
@@ -23,7 +24,9 @@ namespace Telecom.TourismControllers.Controllers
         private ValidateModel_ValidateResult vResult;
         public ActionResult Index()
         {
-            
+            int a = 0;
+            int b = 0;
+            int c = a/b;
             Object result = ApiHelper.GetWebApi<Object>(Configs.GetConfig.Base.WebApiUri, "api/test",
                 new Dictionary<string, string>
                 {
